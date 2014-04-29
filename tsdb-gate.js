@@ -8,13 +8,13 @@ var server = net.createServer(function (c) { //'connection' listener
 		socketData += data;
 	});
 	c.on('end', function () {
-		if (!socketData || socketData == null || socketData.length == 0) {
+		if (socketData.length == 0) {
 			return;
 		}
 		socketData.split('\n').forEach(function (elem) {
 			if (elem.length > 0) {
 				var bufferKey = elem.replace(/\|/gi, '_').trim(); // clear data
-				buffer[bufferKey] = (buffer[elem] || 0) + 1;
+				buffer[bufferKey] = (buffer[bufferKey] || 0) + 1;
 			}
 		});
 	});
